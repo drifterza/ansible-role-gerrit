@@ -17,6 +17,7 @@
 	type = LUCENE
 [auth]
 	type = {{ gerrit_auth_type }}
+	gitBasicAuthPolicy = HTTP
 [sendemail]
 	smtpServer = {{ gerrit_smtp_server }}
 [container]
@@ -25,7 +26,9 @@
 [sshd]
 	listenAddress = *:{{ gerrit_sshd_listen_port }}
 [httpd]
-	listenUrl = http://*:{{ gerrit_http_listen_port }}/
+	listenUrl = proxy-{{ gerrit_canonical_web_url }}
+[core]
+	packedGitLimit = 200 m
 [cache]
 	directory = cache
 [gitweb]
@@ -50,3 +53,4 @@
 {% if gerrit_allow_remote_admin is defined and gerrit_allow_remote_admin %}
     allowRemoteAdmin = true
 {% endif %}
+{% %}}
