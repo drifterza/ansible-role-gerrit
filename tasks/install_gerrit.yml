@@ -152,6 +152,14 @@
   with_items: '{{ gerrit_plugins }}'
   when: gerrit_install_plugins is defined and gerrit_install_plugins
 
+- name: install_gerrit | installing gerrit plugins (compiled)
+  copy:
+    src: "{{ item.name }}"
+    dest: "{{ gerrit_site_dir }}/plugins/{{ item.name }}"
+  notify: restart gerrit
+  with_items: '{{ gerrit_plugins_compiled }}'
+  when: gerrit_install_plugins_compiled is defined and gerrit_install_plugins_compiled
+
 - name: install_gerrit | Ensuring Permissions Are Correct For {{ gerrit_site_dir }}
   file:
     path: "{{ gerrit_site_dir }}"
