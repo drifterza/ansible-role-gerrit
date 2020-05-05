@@ -44,7 +44,18 @@ gerrit_ldap_info:
     referral: 'follow'
 gerrit_mysql_connector_file: mysql-connector-java-5.1.21.jar
 gerrit_mysql_connector_url: http://repo2.maven.org/maven2/mysql/mysql-connector-java/5.1.21
-gerrit_plugins_compiled: []
+gerrit_plugins_compiled:
+  - name: admin-console.jar
+  - name: github-oauth-3.1.4.jar
+  - name: github-plugin-3.1.4.jar
+  - name: metrics-reporter-prometheus.jar
+  - name: oauth.jar
+  - name: slack-integration.jar
+  - name: multi-site.jar
+  - name: avatars-external.jar
+  - name: avatars-gravatar.jar
+  - name: its-jira.jar
+  - name: high-availibility.jar
 gerrit_plugins: []
 gerrit_replication_enabled: false  #defines if replication should be enabled or not
 gerrit_replication_info:
