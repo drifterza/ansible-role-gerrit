@@ -52,8 +52,6 @@ gerrit_plugins_compiled:
   - name: oauth.jar
   - name: slack-integration.jar
   - name: multi-site.jar
-  - name: avatars-external.jar
-  - name: avatars-gravatar.jar
   - name: its-jira.jar
   - name: high-availability.jar
 gerrit_plugins: []
