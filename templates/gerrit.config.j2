@@ -10,10 +10,10 @@
 {% for item in gerrit_db_info %}
 	type = {{ item.type }}
 	database = {{ item.db }}
-{% if item.type == "mysql" %}}
+{% if item.type == "mysql" %}
 	hostname = {{ item.host }}
 	username = {{ item.user }}
-{% endif %}}
+{% endif %}
 {% endfor %}
 {% if gerrit_db_info == "h2" %}
 [noteDb "changes"]
@@ -63,7 +63,8 @@
 {% if gerrit_allow_remote_admin is defined and gerrit_allow_remote_admin %}
     allowRemoteAdmin = true
 {% endif %}
-{% if gerrit_oauth_provider_google is defined %}}
+
+{% if gerrit_oauth_provider_google is defined %}
 [plugin "gerrit-oauth-provider-google-oauth"]
 client-id = "{{ gerrit_google_client_id }}"
 client-secret = "{{ gerrit_google_client_secret }}"
