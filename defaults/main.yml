@@ -55,7 +55,7 @@ gerrit_plugins_compiled:
   - name: avatars-external.jar
   - name: avatars-gravatar.jar
   - name: its-jira.jar
-  - name: high-availibility.jar
+  - name: high-availability.jar
 gerrit_plugins: []
 gerrit_replication_enabled: false  #defines if replication should be enabled or not
 gerrit_replication_info:
