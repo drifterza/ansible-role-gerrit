@@ -10,14 +10,24 @@
 {% for item in gerrit_db_info %}
 	type = {{ item.type }}
 	database = {{ item.db }}
+{% if item.type == "mysql" %}}
 	hostname = {{ item.host }}
 	username = {{ item.user }}
+{% endif %}}
 {% endfor %}
+{% if gerrit_db_info == "h2" %}
+[noteDb "changes"]
+    disableReviewDb = true
+    primaryStorage = note db
+    read = true
+    sequence = true
+    write = true
+{% endif %}
 [index]
 	type = LUCENE
 [auth]
 	type = {{ gerrit_auth_type }}
-	gitBasicAuthPolicy = HTTP
+    gitBasicAuthPolicy = HTTP
 [sendemail]
 	smtpServer = {{ gerrit_smtp_server }}
 [container]
@@ -52,4 +62,10 @@
 [plugins]
 {% if gerrit_allow_remote_admin is defined and gerrit_allow_remote_admin %}
     allowRemoteAdmin = true
+{% endif %}
+{% if gerrit_oauth_provider_google is defined %}}
+[plugin "gerrit-oauth-provider-google-oauth"]
+client-id = "{{ gerrit_google_client_id }}"
+client-secret = "{{ gerrit_google_client_secret }}"
+link-to-existing-openid-accounts = true
 {% endif %}

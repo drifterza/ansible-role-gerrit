@@ -11,9 +11,7 @@ gerrit_canonical_web_url: http://{{ ansible_hostname }}.{{ pri_domain_name }}:{{
 gerrit_db_info:
   - host: localhost
     type: h2
-    db: db/ReviewDB
-    user: gerrit
-    pass: gerrit
+    db: "{{ gerrit_site_dir }}/db/ReviewDB"
 #  - host: localhost
 #    type: mysql
 #    db: reviewdb
@@ -46,12 +44,17 @@ gerrit_mysql_connector_file: mysql-connector-java-5.1.21.jar
 gerrit_mysql_connector_url: http://repo2.maven.org/maven2/mysql/mysql-connector-java/5.1.21
 gerrit_plugins_compiled:
   - name: admin-console.jar
+  - name: github-oauth-3.1.4.jar
+  - name: github-plugin-3.1.4.jar
   - name: metrics-reporter-prometheus.jar
   - name: oauth.jar
   - name: slack-integration.jar
   - name: multi-site.jar
+  - name: avatars-external.jar
+  - name: avatars-gravatar.jar
   - name: its-jira.jar
   - name: high-availability.jar
+gerrit_oauth_provider_google: false
 gerrit_plugins: []
 gerrit_replication_enabled: false  #defines if replication should be enabled or not
 gerrit_replication_info:
