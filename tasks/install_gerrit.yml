@@ -40,32 +40,13 @@
     system: yes
     state: present
 
-- name: install_gerrit | creating MySQL DB (if used)
-  mysql_db:
-    name: "{{ item.db }}"
-    state: present
-  with_items: '{{ gerrit_db_info }}'
-  when: item.type is defined and item.type == "mysql"
-
-- name: install_gerrit | creating MySQL DB User(s) (if used)
-  mysql_user:
-    name: "{{ item.user }}"
-    password: "{{ item.pass }}"
-    priv: "{{ item.db }}.*:ALL"
-    state: present
-  with_items: '{{ gerrit_db_info }}'
-  when: item.type is defined and item.type == "mysql"
-
 - name: install_gerrit | creating gerrit site directory
   file:
-    path: "{{ item.directory }}"
+    path: "{{ gerrit_site_dir }}"
     owner: "{{ gerrit_account_info.name }}"
     group: "{{ gerrit_account_info.group }}"
     mode: 0755
     state: directory
-  loop:
-    - { directory: "gerrit_site_dir" }
-    - { directory: "gerrit_site_dir/db"}
 
 - name: install_gerrit | creating gerrit etc directory
   file:
@@ -100,13 +81,6 @@
   args:
     creates: "{{ gerrit_site_dir }}/bin/gerrit.sh"
   register: gerrit_initialization
-
-- name: install_gerrit | installing mysql connector
-  get_url:
-    url: "{{ gerrit_mysql_connector_url }}/{{ gerrit_mysql_connector_file }}"
-    dest: "{{ gerrit_site_dir }}/lib/{{ gerrit_mysql_connector_file }}"
-  become_user: "{{ gerrit_account_info.name }}"
-  become: yes
 
 - name: install_gerrit | reindexing gerrit
   become: yes

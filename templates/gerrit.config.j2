@@ -6,19 +6,10 @@
 	canonicalWebUrl = {{ gerrit_canonical_web_url }}
 {% endif %}
 
-[database]
-{% for item in gerrit_db_info %}
-	type = {{ item.type }}
-	database = {{ item.db }}
-{% if item.type == "mysql" %}
-	hostname = {{ item.host }}
-	username = {{ item.user }}
-{% endif %}
-{% endfor %}
-{% if gerrit_db_info == "h2" %}
 [noteDb "changes"]
+	autoMigrate = true
     disableReviewDb = true
-    primaryStorage = note db
+    primaryStorage = NOTE_DB
     read = true
     sequence = true
     write = true
