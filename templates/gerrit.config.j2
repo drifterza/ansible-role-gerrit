@@ -27,7 +27,7 @@
 [sshd]
 	listenAddress = *:{{ gerrit_sshd_listen_port }}
 [httpd]
-	listenUrl = proxy-{{ gerrit_canonical_web_url }}
+	listenUrl = proxy-{{ gerrit_http_listen_url }}:{{ gerrit_http_listen_port }}
 [core]
 	packedGitLimit = 200 m
 [cache]
